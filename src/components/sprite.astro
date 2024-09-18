@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = (
+  | {
+      type: 'inline';
+      icon: 'tag' | 'flash' | 'badge';
+    }
+  | {
+      type: 'file';
+      icon: 'none';
+    }
+) &
+  HTMLAttributes<'svg'>;
+
+const { type, icon, ...props }: Props = Astro.props;
+---
+
+<svg {...props}>
+  <use href={type === 'inline' ? `#${icon}` : `/sprite.svg#${icon}`} />
+</svg>

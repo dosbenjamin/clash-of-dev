@@ -1,0 +1,22 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types';
+
+type Props<Tag extends HTMLTag = 'div'> = Polymorphic<{
+  as: Tag;
+}>;
+
+const { as: Element = 'div', ...props }: Props = Astro.props;
+---
+
+<Element class:list="container" {...props}>
+  <slot />
+</Element>
+
+<style>
+  .container {
+    margin: 0 auto;
+    padding: 0 2rem;
+
+    max-width: 120rem;
+  }
+</style>
