@@ -1,0 +1,26 @@
+{
+  "name": "clash-of-dev",
+  "type": "module",
+  "version": "1.0.0`",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check:dry": "biome check .",
+    "check:write": "biome check --write .",
+    "lint:dry": "biome lint .",
+    "lint:write": "biome lint --write .",
+    "format:dry": "biome format .",
+    "format:write": "biome format --write ."
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.3",
+    "astro": "^4.15.7",
+    "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.1"
+  }
+}
