@@ -1,0 +1,21 @@
+---
+import Text from '@components/text.astro';
+---
+
+<Text as="a" href="/" leading="none" transform="uppercase">La piscine</Text>
+
+<style>
+  a {
+    display: inline-block;
+
+    text-decoration: none;
+
+    background-color: var(--color-black);
+    color: var(--color-white);
+
+    padding: 0.75em 1em;
+    border-radius: 9999px;
+
+    transform: rotate(8deg);
+  }
+</style>

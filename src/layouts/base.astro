@@ -1,0 +1,108 @@
+---
+import Header from '@components/header.astro';
+
+type Props = {
+  title: string;
+};
+
+const { title }: Props = Astro.props;
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} - Clash of Dev</title>
+    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin>
+    <style is:inline>
+      @font-face {
+        font-family: 'Inter Variable';
+        src: url("/fonts/inter-variable.woff2");
+        font-display: swap;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <footer>
+
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    /* Typography */
+    --font-sans: 'Inter Variable', sans-serif;
+
+    --text-root: 12px;
+    --text-base: 1rem;
+    --text-lg: 9.6rem;
+    --text-xl: 10rem; /* TODO */
+
+    --leading-none: 1;
+    --leading-tight: 1.05;
+    --leading-normal: 1.6;
+
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+
+    /* Colors */
+    --color-black: #262625;
+    --color-white: #F3F3F1;
+
+    --color-purple-light: #EBEDFF;
+    --color-purple-middle: #9FA8FE;
+    --color-purple-dark: #8A92E3;
+
+    --color-pink-light: #FFEDF5;
+    --color-pink-middle: #F588B9;
+    --color-pink-dark: #D6699A;
+
+    --color-green-light: #ECFFCE;
+    --color-green-middle: #A2B87E;
+    --color-green-dark: #95AE6D;
+
+    --color-green-light: #BADAFF;
+    --color-green-middle: #809cbd; /* TODO */
+    --color-green-dark: #809CBD;
+
+    --color-mustard-light: #FFFAC2;
+    --color-mustard-middle: #CAC48E;
+    --color-mustard-dark: #C2BB82;
+
+    --color-orange-light: #FFBCAB;
+    --color-orange-middle: #F28164;
+    --color-orange-dark: #D46F55;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+  }
+
+  html {
+    font-size: var(--text-root);
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    text-rendering: optimizeLegibility;
+
+    font-family: var(--font-sans);
+    line-height: var(--leading-normal);
+
+    min-height: 100vh;
+  }
+</style>
