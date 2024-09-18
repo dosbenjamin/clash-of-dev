@@ -1,0 +1,45 @@
+---
+import Sprite from '@components/sprite.astro';
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = {
+  colorScheme: 'green' | 'pink' | 'purple';
+} & HTMLAttributes<'span'>;
+
+const { colorScheme, class: className, ...props }: Props = Astro.props;
+---
+
+<span class:list={[`tag-${colorScheme}`, className]} {...props}>
+  <Sprite type="inline" icon="tag" />
+</span>
+
+<style>
+  span {
+    display: grid;
+    place-items: center;
+
+    aspect-ratio: 1;
+
+    border-radius: 9999px;
+  }
+
+  .tag-green {
+    background-color: var(--color-green-middle);
+    color: var(--color-black);
+  }
+
+  .tag-pink {
+    background-color: var(--color-pink-middle);
+    color: var(--color-pink-light);
+  }
+
+  .tag-purple {
+    background-color: var(--color-purple-middle);
+    color: var(--color-green-light);
+  }
+
+  svg {
+    aspect-ratio: 1;
+    width: 35%;
+  }
+</style>

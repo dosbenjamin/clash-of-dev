@@ -1,0 +1,105 @@
+---
+import Sprite from '@components/sprite.astro';
+import TagIcon from '@components/tag-icon.astro';
+import Text from '@components/text.astro';
+---
+
+<scrollable-marquee>
+  <div class="scrollable-marquee-wrapper">
+    {Array.from({ length: 5 }, () => (
+      <Text size="xl" weight="semibold" class="scrollable-marquee-item">
+        {'<A>'}Front les Tous!
+        <TagIcon class="tag" colorScheme="green" />
+        Clash of Dev
+        <span class="emoji">
+          <Sprite type="inline" icon="emoji" />
+        </span>
+      </Text>
+    ))}
+  </div>
+</scrollable-marquee>
+
+<style>
+  scrollable-marquee {
+    overflow: hidden;
+  }
+
+  .scrollable-marquee-wrapper {
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  .scrollable-marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 0.1em;
+
+    padding-left: 0.1em;
+  }
+
+  .tag {
+    flex-shrink: 0;
+
+    width: 0.35em;
+
+    transform: rotate(20deg);
+  }
+
+  .emoji {
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    aspect-ratio: 1;
+    width: 0.35em;
+
+    color: var(--color-white);
+    background-color: var(--color-black);
+
+    border-radius: 9999px;
+  }
+
+  .emoji svg {
+    aspect-ratio: 1;
+    width: 55%;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  // TODO
+  gsap.registerPlugin(ScrollTrigger);
+
+  class ScrollableMarquee extends HTMLElement {
+    #marquee = gsap.to(this.querySelectorAll('.scrollable-marquee-item'), {
+      xPercent: -100,
+      duration: 25,
+      ease: 'none',
+      repeat: -1,
+    });
+
+    #scroll = gsap.to(this.querySelector('.scrollable-marquee-wrapper'), {
+      xPercent: -50,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: this,
+        scrub: 0.5,
+        start: 'bottom bottom',
+        end: 'bottom top',
+        onLeave: () => this.#marquee.pause(),
+        onEnterBack: () => this.#marquee.resume(),
+      },
+    });
+
+    disconnectedCallback(): void {
+      this.#scroll.kill();
+      this.#marquee.kill();
+    }
+  }
+
+  customElements.define('scrollable-marquee', ScrollableMarquee);
+</script>

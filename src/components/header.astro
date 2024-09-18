@@ -1,15 +1,16 @@
 ---
+import Container from '@components/container.astro';
 import Logo from '@components/logo.astro';
 import ScrollProgressValue from '@components/scroll-progress-value.astro';
 ---
 
-<header class="container header">
+<Container as="header">
   <Logo />
 
   <ScrollProgressValue />
 
   <button>Click here!</button>
-</header>
+</Container>
 
 <style>
   header {

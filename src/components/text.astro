@@ -1,0 +1,70 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types';
+
+type Props<Tag extends HTMLTag = 'span'> = Polymorphic<{
+  as: Tag;
+  size?: 'base' | 'lg' | 'xl';
+  leading?: 'none' | 'tight' | 'normal';
+  weight?: 'medium' | 'semibold' | 'bold';
+}>;
+
+const {
+  as: Element = 'span',
+  size,
+  leading,
+  weight,
+  class: className,
+  ...props
+}: Props = Astro.props;
+---
+
+<Element
+  class:list={['text', size && `text-${size}`, leading && `leading-${leading}`, weight && `font-${weight}`, className]}
+  {...props}
+>
+  <slot />
+</Element>
+
+<style>
+  /* Size */
+  .text-base {
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+  }
+
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--leading-tight);
+  }
+
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--leading-none);
+  }
+
+  /* Leading */
+  .leading-none {
+    line-height: var(--leading-none);
+  }
+
+  .leading-tight {
+    line-height: var(--leading-tight);
+  }
+
+  .leading-normal {
+    line-height: var(--leading-normal);
+  }
+
+  /* Weight */
+  .font-medium {
+    font-weight: var(--font-medium);
+  }
+
+  .font-semibold {
+    font-weight: var(--font-semibold);
+  }
+
+  .font-bold {
+    font-weight: var(--font-bold);
+  }
+</style>
