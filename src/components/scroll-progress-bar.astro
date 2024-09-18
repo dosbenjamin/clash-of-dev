@@ -1,4 +1,6 @@
-<div />
+<div>
+  <scroll-progress-bar />
+</div>
 
 <style>
   div {
@@ -7,7 +9,40 @@
     top: 0;
 
     height: var(--scroll-progress-bar-height);
+  }
 
-    background-color: red;
+  scroll-progress-bar {
+    display: block;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: var(--color-black);
+
+    transform-origin: left;
   }
 </style>
+
+<script>
+  import type Lenis from 'lenis';
+  import { lenis } from '@scripts/lenis';
+  import { gsap } from 'gsap';
+
+  class ScrollProgressBar extends HTMLElement {
+    #setX = gsap.quickSetter(this, 'scaleX');
+
+    #onScroll = (lenis: Lenis): void => {
+      this.#setX(lenis.progress);
+    }
+
+    connectedCallback(): void {
+      lenis.on('scroll', this.#onScroll);
+    }
+
+    disconnectedCallback(): void {
+      lenis.off('scroll', this.#onScroll);
+    }
+  }
+
+  customElements.define('scroll-progress-bar', ScrollProgressBar);
+</script>

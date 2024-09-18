@@ -1,0 +1,67 @@
+:root {
+  /* Typography */
+  --font-sans: "Inter Variable", sans-serif;
+
+  --text-root: clamp(12px, 0.75vw, 16px);
+  --text-base: 1rem;
+  --text-lg: 9.6rem;
+  --text-xl: 18rem;
+
+  --leading-none: 1;
+  --leading-tight: 1.05;
+  --leading-normal: 1.6;
+
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Colors */
+  --color-black: #262625;
+  --color-white: #f3f3f1;
+
+  --color-purple-light: #ebedff;
+  --color-purple-middle: #9fa8fe;
+  --color-purple-dark: #8a92e3;
+
+  --color-pink-light: #ffedf5;
+  --color-pink-middle: #f588b9;
+  --color-pink-dark: #d6699a;
+
+  --color-green-light: #ecffce;
+  --color-green-middle: #a2b87e;
+  --color-green-dark: #95ae6d;
+
+  --color-blue-light: #badaff;
+  --color-blue-middle: #809cbd; /* TODO */
+  --color-blue-dark: #809cbd;
+
+  --color-mustard-light: #fffac2;
+  --color-mustard-middle: #cac48e;
+  --color-mustard-dark: #c2bb82;
+
+  --color-orange-light: #ffbcab;
+  --color-orange-middle: #f28164;
+  --color-orange-dark: #d46f55;
+
+  /* Scroll */
+  --scroll-progress-bar-height: 4px;
+}
+
+html {
+  font-size: var(--text-root);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-rendering: optimizeLegibility;
+
+  font-family: var(--font-sans);
+  line-height: var(--leading-normal);
+
+  min-height: 100vh;
+
+  background-color: var(--color-white);
+  color: var(--color-black);
+}

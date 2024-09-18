@@ -1,0 +1,28 @@
+<scroll-progress-value>0</scroll-progress-value>
+
+<style>
+  scroll-progress-value::after {
+    content: '%';
+  }
+</style>
+
+<script>
+  import type Lenis from 'lenis';
+  import { lenis } from '@scripts/lenis';
+
+  class ScrollProgressValue extends HTMLElement {
+    #onScroll = (lenis: Lenis): void => {
+      this.textContent = String(Math.round(lenis.progress * 100));
+    }
+
+    connectedCallback(): void {
+      lenis.on('scroll', this.#onScroll);
+    }
+
+    disconnectedCallback(): void {
+      lenis.off('scroll', this.#onScroll);
+    }
+  }
+
+  customElements.define('scroll-progress-value', ScrollProgressValue);
+</script>

@@ -1,6 +1,12 @@
 ---
 import Header from '@components/header.astro';
 import ScrollProgressBar from '@components/scroll-progress-bar.astro';
+import Sprite from '@components/sprite.html';
+
+import '@styles/reset.css';
+import '@styles/global.css';
+import '@styles/container.css';
+import '@styles/text.css';
 
 type Props = {
   title: string;
@@ -26,19 +32,7 @@ const { title }: Props = Astro.props;
     </style>
   </head>
   <body>
-    <svg style="display: none">
-      <symbol id="tag" viewBox="0 0 27 24">
-        <path d="m4.36 19.1 2.48-5.93a.23.23 0 0 0-.04-.24l-1.74-2.02a.23.23 0 0 0-.4.07L.7 21.3a.23.23 0 0 0 .04.23l1.2 1.4c.07.07.16.1.25.07l10.34-2.9a.23.23 0 0 0 .12-.38l-1.75-2.04a.23.23 0 0 0-.25-.07l-6 1.8a.23.23 0 0 1-.28-.3ZM22.75 3.49l-6.28 1.5a.23.23 0 0 1-.23-.07L14.49 2.9a.23.23 0 0 1 .14-.37L25.5.22c.08-.01.16.02.22.08l1.2 1.4c.07.07.08.17.04.25l-4.5 9.7a.23.23 0 0 1-.4.06l-1.75-2.04a.23.23 0 0 1-.03-.25L23 3.81a.23.23 0 0 0-.26-.32Zm-11.09-.38L9.56 4.9a.23.23 0 0 0-.07.25l5.66 15.31c.05.15.24.2.36.1l2.11-1.8c.07-.06.1-.16.07-.25l-5.66-15.3a.23.23 0 0 0-.37-.1Z" fill="currentColor"/>
-      </symbol>
-
-      <symbol id="flash" viewBox="0 0 15 27" >
-        <path d="M14.1421 0L3.41643 1.31251L-0.00805664 15.5615L5.42857 14.8963L3.28276 26.618L13.7794 9.72536L6.96514 10.5592L14.1421 0Z" fill="currentColor"/>
-      </symbol>
-
-      <symbol id="badge" viewBox="0 0 44 47">
-        <path d="M21 0 0 7c1 21 5 30 24 39h1C42 36 45 27 43 6V5L21 0Z" fill="currentColor"/>
-      </symbol>
-    </svg>
+    <Sprite />
 
     <ScrollProgressBar />
     <Header />
@@ -52,77 +46,3 @@ const { title }: Props = Astro.props;
     </footer>
   </body>
 </html>
-
-<style is:global>
-  :root {
-    /* Typography */
-    --font-sans: 'Inter Variable', sans-serif;
-
-    --text-root: clamp(12px, 0.75vw, 16px);
-    --text-base: 1rem;
-    --text-lg: 9.6rem;
-    --text-xl: 10rem; /* TODO */
-
-    --leading-none: 1;
-    --leading-tight: 1.05;
-    --leading-normal: 1.6;
-
-    --font-medium: 500;
-    --font-semibold: 600;
-    --font-bold: 700;
-
-    /* Colors */
-    --color-black: #262625;
-    --color-white: #F3F3F1;
-
-    --color-purple-light: #EBEDFF;
-    --color-purple-middle: #9FA8FE;
-    --color-purple-dark: #8A92E3;
-
-    --color-pink-light: #FFEDF5;
-    --color-pink-middle: #F588B9;
-    --color-pink-dark: #D6699A;
-
-    --color-green-light: #ECFFCE;
-    --color-green-middle: #A2B87E;
-    --color-green-dark: #95AE6D;
-
-    --color-blue-light: #BADAFF;
-    --color-blue-middle: #809cbd; /* TODO */
-    --color-blue-dark: #809CBD;
-
-    --color-mustard-light: #FFFAC2;
-    --color-mustard-middle: #CAC48E;
-    --color-mustard-dark: #C2BB82;
-
-    --color-orange-light: #FFBCAB;
-    --color-orange-middle: #F28164;
-    --color-orange-dark: #D46F55;
-
-    --scroll-progress-bar-height: 4px;
-  }
-
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  * {
-    margin: 0;
-  }
-
-  html {
-    font-size: var(--text-root);
-  }
-
-  body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    text-rendering: optimizeLegibility;
-
-    font-family: var(--font-sans);
-    line-height: var(--leading-normal);
-
-    min-height: 100vh;
-  }
-</style>
