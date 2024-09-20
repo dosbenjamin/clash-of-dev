@@ -4,10 +4,10 @@ import TagIcon from '@components/tag-icon.astro';
 import Text from '@components/text.astro';
 ---
 
-<scrollable-marquee>
-  <div class="scrollable-marquee-wrapper">
+<div class="marquee">
+  <div class="marquee-wrapper">
     {Array.from({ length: 5 }, () => (
-      <Text size="xl" weight="semibold" class="scrollable-marquee-item">
+      <Text size="xl" weight="semibold" class="marquee-item">
         {'<A>'}Front les Tous!
         <TagIcon class="tag" colorScheme="green" />
         Clash of Dev
@@ -17,20 +17,20 @@ import Text from '@components/text.astro';
       </Text>
     ))}
   </div>
-</scrollable-marquee>
+</div>
 
 <style>
-  scrollable-marquee {
+  .marquee {
     overflow: hidden;
   }
 
-  .scrollable-marquee-wrapper {
+  .marquee-wrapper {
     display: flex;
     justify-content: center;
     white-space: nowrap;
   }
 
-  .scrollable-marquee-item {
+  .marquee-item {
     display: flex;
     align-items: center;
     gap: 0.1em;
@@ -74,32 +74,23 @@ import Text from '@components/text.astro';
   // TODO
   gsap.registerPlugin(ScrollTrigger);
 
-  class ScrollableMarquee extends HTMLElement {
-    #marquee = gsap.to(this.querySelectorAll('.scrollable-marquee-item'), {
-      xPercent: -100,
-      duration: 25,
-      ease: 'none',
-      repeat: -1,
-    });
+  const marquee =  gsap.to('.marquee-item', {
+    xPercent: -100,
+    duration: 25,
+    ease: 'none',
+    repeat: -1,
+  });
 
-    #scroll = gsap.to(this.querySelector('.scrollable-marquee-wrapper'), {
-      xPercent: -50,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: this,
-        scrub: 0.5,
-        start: 'bottom bottom',
-        end: 'bottom top',
-        onLeave: () => this.#marquee.pause(),
-        onEnterBack: () => this.#marquee.resume(),
-      },
-    });
-
-    disconnectedCallback(): void {
-      this.#scroll.kill();
-      this.#marquee.kill();
-    }
-  }
-
-  customElements.define('scrollable-marquee', ScrollableMarquee);
+  gsap.to('.marquee-wrapper', {
+    xPercent: -50,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.marquee',
+      scrub: 0.5,
+      start: 'bottom bottom',
+      end: 'bottom top',
+      onLeave: () => marquee.pause(),
+      onEnterBack: () => marquee.resume(),
+    },
+  });
 </script>

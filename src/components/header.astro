@@ -4,7 +4,7 @@ import Logo from '@components/logo.astro';
 import ScrollProgressValue from '@components/scroll-progress-value.astro';
 ---
 
-<Container as="header">
+<Container as="header" class="page-header">
   <Logo />
 
   <ScrollProgressValue />
@@ -16,7 +16,7 @@ import ScrollProgressValue from '@components/scroll-progress-value.astro';
   header {
     position: fixed;
     inset-inline: 0;
-    top: calc(1.75rem + var(--scroll-progress-bar-height));
+    top: 0;
 
     display: flex;
     justify-content: space-between;

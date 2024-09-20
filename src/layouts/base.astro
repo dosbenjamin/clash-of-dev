@@ -1,6 +1,5 @@
 ---
 import Header from '@components/header.astro';
-import ScrollProgressBar from '@components/scroll-progress-bar.astro';
 import Sprite from '@components/sprite.html';
 
 type Props = {
@@ -28,8 +27,6 @@ const { title }: Props = Astro.props;
   </head>
   <body>
     <Sprite />
-
-    <ScrollProgressBar />
     <Header />
 
     <main>
@@ -87,9 +84,6 @@ const { title }: Props = Astro.props;
     --color-orange-light: #ffbcab;
     --color-orange-middle: #f28164;
     --color-orange-dark: #d46f55;
-
-    /* Scroll */
-    --scroll-progress-bar-height: 4px;
   }
 
   html {

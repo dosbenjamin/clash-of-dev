@@ -2,33 +2,45 @@
 import Text from '@components/text.astro';
 ---
 
-<Text weight="bold" leading="none">
-  <scroll-progress-value>0</scroll-progress-value>
-</Text>
+<Text weight="bold" leading="none" class="scroll-progress-value" />
 
 <style>
-  scroll-progress-value::after {
-    content: '%';
+  .scroll-progress-value {
+    position: relative;
+
+    padding: 2.5rem 0;
+  }
+
+  .scroll-progress-value::before {
+    content: '';
+
+    left: 50%;
+    top: 0;
+    position: fixed;
+
+    height: 4px;
+    width: 100vw;
+
+    transform: translateX(-50%);
+
+    --scroll-progress-percentage: calc(var(--scroll-progress) * 1%);
+
+    background-image: linear-gradient(transparent, transparent), linear-gradient(var(--color-black), var(--color-black));
+    background-size: calc(100% - var(--scroll-progress-percentage)) 100%, var(--scroll-progress-percentage) 100%;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+  }
+
+  .scroll-progress-value::after {
+    counter-reset: progress round(var(--scroll-progress));
+    content: counter(progress)'%';
   }
 </style>
 
 <script>
-  import type Lenis from 'lenis';
   import { lenis } from '@scripts/lenis';
+  import { gsap } from 'gsap';
 
-  class ScrollProgressValue extends HTMLElement {
-    #onScroll = (lenis: Lenis): void => {
-      this.textContent = String(Math.round(lenis.progress * 100));
-    }
-
-    connectedCallback(): void {
-      lenis.on('scroll', this.#onScroll);
-    }
-
-    disconnectedCallback(): void {
-      lenis.off('scroll', this.#onScroll);
-    }
-  }
-
-  customElements.define('scroll-progress-value', ScrollProgressValue);
+  const setter = gsap.quickSetter('.scroll-progress-value', '--scroll-progress');
+  lenis.on('scroll', (lenis) => setter(lenis.progress * 100));
 </script>
